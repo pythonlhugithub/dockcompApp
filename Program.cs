@@ -15,7 +15,14 @@ var user =  "pythonusr1"; // Warning do not use the SA account
 var password =  "Archer!!77";
 var database =  "bookDb";
 
- var constr="Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=BookDb;Data Source=.\\sqlexpress; User ID=pythonusr1; Password=Archer!!77";
+ //var constr="Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=BookDb;Data Source=localhost,62310; User ID=pythonusr1; Password=Archer!!77";
+
+
+//var constr="Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=BookDb;Server=172.24.32.1,62310; User ID=pythonusr1; Password=Archer!!77";
+
+ var constr="Initial Catalog=BookDb;Server=172.24.32.1,62310; User ID=pythonusr1; Password=Archer!!77";
+
+
 builder.Services.AddDbContext<AppDataDbcontext>(
     opts=>{
         opts.EnableDetailedErrors();
@@ -52,7 +59,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 
-app.MapGet("/GetAllBook/", async (AppDataDbcontext db)=>{
+app.MapGet("/GetAllBook", async (AppDataDbcontext db)=>{
 
     var books=await db.Books.ToListAsync();
 
